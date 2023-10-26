@@ -1,0 +1,88 @@
+﻿@page
+@model SchoolApp.Pages.Modules.IndexModel
+@{
+    ViewData["Title"] = "Modules List";
+}
+
+
+<div class="container-fluid">
+
+    <div class="container-fluid bg-dark py-1 mb-2">
+        <h3 class="text-center text-light">Module</h3>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title title-2 text-dark">Modules List</h4>
+            <hr>
+
+            <!-- Add Modal Button -->
+            <div class="d-flex justify-content-center my-3">
+                <div class="col-xl-5 col-lg-8 col-md-6 col-sm-8 col-12">
+                    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addmodal"><i class="fas fa-plus"></i>&nbsp; New Module</button>
+                </div>
+            </div>
+
+            <form method="post">
+
+                <!-- Table -->
+                <div class="d-flex justify-content-center">
+                    <div class="table-responsive col-xl-5 col-lg-8 col-md-6 col-sm-8 col-12">
+                        <table id="zero_config" class="table table-borderless table-striped table-earning">
+                            <thead>
+                                <tr>
+                                    <th class="text-white bg-primary">
+                                        <span class="h5">Name</span>
+                                    </th>
+                                    <th class="text-white bg-primary d-flex justify-content-end">
+                                        <span class="h5">Action</span>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model.Modules)
+                                {
+                                    <tr>
+                                        <td class="text-dark text-capitalize"><span class="h5">@item.Name</span></td>
+                                        <td class="text-dark d-flex justify-content-end">
+                                            <a asp-route-id="@item.Id" asp-page="/Modules/Details" class="text text-white btn btn-success mr-1" data-toggle="tooltip" data-placement="left" title="Check"><i class="bi bi-info-circle-fill"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Add Modal -->
+                <div class="modal fade" id="addmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" style="font-size:20px">Add New Module</h5>
+                                <button type="button" class="close mb-1" data-dismiss="modal" aria-label="Close"><i class="bi bi-x-circle"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <input asp-for="Module.Name" type="text" class="form-control h4" placeholder="type module name">
+                                <span asp-validation-for="Module.Name" class="text-danger"></span>
+                            </div>
+                            <div class="modal-footer">
+                                <button asp-page-handler="Create" class="btn btn-primary">Create</button>
+                                <button data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
