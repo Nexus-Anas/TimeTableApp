@@ -1,0 +1,102 @@
+﻿@page
+@model SchoolApp.Pages.Teachers.DetailsModel
+@{
+    ViewData["Title"] = "Teacher Details";
+}
+
+
+<div class="container-fluid">
+
+    <div class="container-fluid bg-dark py-1 mb-2">
+        <h3 class="text-center text-light">Teacher</h3>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title title-2 text-dark">Teacher Details</h4>
+            <hr>
+
+            <div class="d-flex justify-content-center">
+                <div class="col-12">
+                    <form method="post">
+
+                        <div class="card" style=" background-color:#DFDDDE">
+                            <div class="card-body">
+
+                                <h4 class="card-title">Update</h4>
+
+                                <input type="hidden" asp-for="Teacher.Id" />
+
+                                <input asp-for="Teacher.Name" type="text" class="form-control h4" placeholder="type the teacher's name">
+                                <span asp-validation-for="Teacher.Name" class="text-danger"></span>
+
+                                <select asp-for="Teacher.CourseId" class="form-control form-select h4">
+                                    <option value="">Select Course...</option>
+                                    @foreach (var item in Model.Courses)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="Teacher.CourseId" class="text-danger"></span>
+
+                                <div class="form-group row text-white">
+                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mt-3">
+                                        <a data-toggle="modal" data-target="#updatemodal" class="btn btn-primary btn-lg btn-block">Update</a>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mt-3">
+                                        <a data-toggle="modal" data-target="#deletemodal" class="btn btn-danger btn-lg btn-block">Delete</a>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mt-3">
+                                        <a asp-page="/Teachers/Index" class="btn btn-lg btn-secondary btn-block">Back</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+
+                        <!-- Update Modal -->
+                        <div class="modal fade" id="updatemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Are you sure you want to update this teacher?</h4>
+                                        <button type="button" class="close mb-1" data-dismiss="modal" aria-label="Close"><i class="bi bi-x-circle"></i></button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button asp-page-handler="Update" class="btn btn-primary btn-lg">Update</button>
+                                        <button data-dismiss="modal" class="btn btn-secondary btn-lg">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delete Modal -->
+                        <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Are you sure you want to remove this teacher?</h4>
+                                        <button type="button" class="close mb-1" data-dismiss="modal" aria-label="Close"><i class="bi bi-x-circle"></i></button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button asp-page-handler="Delete" class="btn btn-danger btn-lg">Delete</button>
+                                        <button data-dismiss="modal" class="btn btn-secondary btn-lg">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

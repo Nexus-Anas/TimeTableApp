@@ -1,0 +1,74 @@
+﻿@page
+@model SchoolApp.Pages.Groups.DetailsModel
+@{
+    ViewData["Title"] = "Time Table";
+}
+
+
+<div class="container-fluid">
+
+    <div class="container-fluid bg-dark py-1 mb-2">
+        <h3 class="text-center text-light">Time Table</h3>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title title-2 text-dark">Time Table</h4>
+            <hr>
+
+            <!-- Add Modal Button -->
+            <div class="d-flex justify-content-center my-3">
+                <div class="col-12">
+                    <a asp-page="/Groups/Index" class="btn btn-lg btn-secondary">Back</a>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="d-flex justify-content-center">
+                <div class="table-responsive col-12">
+                    <table id="zero_config" class="table table-borderless table-striped table-earning">
+                        <thead>
+                            <tr>
+                                <th class="text-white bg-primary">
+                                    <span class="h5">Days of Week</span>
+                                </th>
+                                <th class="text-white bg-primary">
+                                    <span class="h5">8:00 - 10:00</span>
+                                </th>
+                                <th class="text-white bg-primary">
+                                    <span class="h5">10:30 - 12:30</span>
+                                </th>
+                                <th class="text-white bg-primary">
+                                    <span class="h5">13:30 - 15:30</span>
+                                </th>
+                                <th class="text-white bg-primary">
+                                    <span class="h5">16:00 - 18:00</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @{int day = 0;}
+                            @for (int i = 0; i < 28; i += 4)
+                            {
+                                <tr>
+                                    <td class="text-dark text-capitalize"><span class="h5">@Model.daysOfWeek[day]</span></td>
+                                    <td class="text-dark text-capitalize"><span class="h5">@Model.AllCourses[i]</span></td>
+                                    <td class="text-dark text-capitalize"><span class="h5">@Model.AllCourses[i + 1]</span></td>
+                                    <td class="text-dark text-capitalize"><span class="h5">@Model.AllCourses[i + 2]</span></td>
+                                    <td class="text-dark text-capitalize"><span class="h5">@Model.AllCourses[i + 3]</span></td>
+                                </tr>
+                                day++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
