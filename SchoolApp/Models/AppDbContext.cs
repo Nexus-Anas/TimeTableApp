@@ -12,4 +12,5 @@ public class AppDbContext : DbContext
     public DbSet<Module> Modules { get; set; }
     public DbSet<Salle> Salles { get; set; }
     public DbSet<Teacher> Teachers { get; set; }
+    public DbSet<TimeTable> TimeTables { get; set; }
 }

@@ -29,19 +29,25 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnPostCreate()
     {
-        //for (char letter = 'A'; letter <= 'Z'; letter++)
-        //{
-        //    for (int number = 1; number <= 3; number++)
-        //    {
-        //        var salle = new Salle
-        //        {
-        //            Name = $"{letter}{number}",
-        //            nbMaxPlaces = 25
-        //        };
-        //        await _db.Salles.AddAsync(salle);
-        //    }
-        //}
-        await _db.Salles.AddAsync(Salle);
+        int salles = await _db.Salles.CountAsync();
+        if (salles == 0)
+        {
+            for (char letter = 'A'; letter <= 'Z'; letter++)
+            {
+                for (int number = 1; number <= 3; number++)
+                {
+                    var salle = new Salle
+                    {
+                        Name = $"{letter}{number}",
+                        nbMaxPlaces = 20
+                    };
+                    await _db.Salles.AddAsync(salle);
+                }
+            }
+        }
+        else
+            await _db.Salles.AddAsync(Salle);
+
         await _db.SaveChangesAsync();
         await OnGet();
         return Page();

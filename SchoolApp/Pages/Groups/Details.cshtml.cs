@@ -16,13 +16,9 @@ public class DetailsModel : PageModel
 
     public Group Group {  get; set; }
     public Module Module { get; set; }
+    public TimeTable TimeTable { get; set; }
     public List<string> daysOfWeek { get; set; }
-    public List<string> Monday { get; set; }
-    public List<string> Tuesday { get; set; }
-    public List<string> Wednesday { get; set; }
-    public List<string> Thursday { get; set; }
-    public List<string> Friday { get; set; }
-    public List<string> AllCourses { get; set; }
+    public List<string> Courses { get; set; }
 
 
 
@@ -31,6 +27,7 @@ public class DetailsModel : PageModel
     {
         Group = await _db.Groups.FindAsync(id);
         Module = await _db.Modules.FindAsync(Group.ModuleId);
+        TimeTable = await _db.TimeTables.Where(t => t.GroupNum == Group.Num).FirstOrDefaultAsync();
 
         daysOfWeek = new()
         {
@@ -38,34 +35,28 @@ public class DetailsModel : PageModel
             "Tuesday",
             "Wednesday",
             "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
+            "Friday"
         };
-
-
-        var courses = await _db.Courses.Where(c => c.ModuleId == Module.Id).Select(c => c.Name).ToListAsync();
-        var random = new Random();
-
-        Monday = courses.OrderBy(_ => random.Next()).ToList();
-        Tuesday = courses.OrderBy(_ => random.Next()).ToList();
-        Wednesday = courses.OrderBy(_ => random.Next()).ToList();
-        Thursday = courses.OrderBy(_ => random.Next()).ToList();
-        Friday = courses.OrderBy(_ => random.Next()).ToList();
-
-        AllCourses = new();
-
-        AllCourses.AddRange(Monday.Take(4));
-        AllCourses.AddRange(Tuesday.Take(4));
-        AllCourses.AddRange(Wednesday.Take(4));
-        AllCourses.AddRange(Thursday.Take(4));
-        AllCourses.AddRange(Friday.Take(4));
-
-        for (int i = 0; i < 8; i++)
-            AllCourses.Add("");
-
+        Courses = new();
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId1).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId2).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId3).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId4).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId5).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId6).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId7).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId8).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId9).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId10).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId11).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId12).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId13).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId14).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId15).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId16).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId17).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId18).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId19).Select(c => c.Name).FirstOrDefaultAsync());
+        Courses.Add(await _db.Courses.Where(c => c.Id == TimeTable.CourseId20).Select(c => c.Name).FirstOrDefaultAsync());
     }
-
-
-
 }

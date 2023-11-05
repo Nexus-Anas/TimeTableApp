@@ -7,7 +7,7 @@
 
 <div class="container-fluid">
 
-    <div class="container-fluid bg-dark py-1 mb-2">
+    <div class="container-fluid bg-secondary py-1 mb-2">
         <h3 class="text-center text-light">Course</h3>
     </div>
 
@@ -19,7 +19,7 @@
             <!-- Add Modal Button -->
             <div class="d-flex justify-content-center my-3">
                 <div class="col-xl-6 col-lg-8 col-md-6 col-sm-8 col-12">
-                    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addmodal"><i class="fas fa-plus"></i>&nbsp; New Course</button>
+                    <button class="btn btn-dark btn-lg" data-toggle="modal" data-target="#addmodal"><i class="fas fa-plus"></i>&nbsp; New Course</button>
                 </div>
             </div>
 
@@ -31,16 +31,16 @@
                         <table id="zero_config" class="table table-borderless table-striped table-earning">
                             <thead>
                                 <tr>
-                                    <th class="text-white bg-primary">
+                                    <th class="text-white bg-dark">
                                         <span class="h5">Name</span>
                                     </th>
-                                    <th class="text-white bg-primary">
+                                    <th class="text-white bg-dark">
                                         <span class="h5">Module</span>
                                     </th>
-                                    <th class="text-white bg-primary">
+                                    <th class="text-white bg-dark">
                                         <span class="h5">Hours</span>
                                     </th>
-                                    <th class="text-white bg-primary d-flex justify-content-end">
+                                    <th class="text-white bg-dark d-flex justify-content-end">
                                         <span class="h5">Action</span>
                                     </th>
                                 </tr>
@@ -54,7 +54,7 @@
                                         <td class="text-dark text-capitalize"><span class="h5">@item.Module.Name</span></td>
                                         <td class="text-dark text-capitalize"><span class="h5">@item.NbHour</span></td>
                                         <td class="text-dark d-flex justify-content-end">
-                                            <a asp-route-id="@item.Id" asp-page="/Courses/Details" class="text text-white btn btn-success mr-1" data-toggle="tooltip" data-placement="left" title="Check"><i class="bi bi-info-circle-fill"></i></a>
+                                            <a asp-route-id="@item.Id" asp-page="/Courses/Details" class="text text-white btn btn-dark mr-1" data-toggle="tooltip" data-placement="left" title="Check"><i class="bi bi-info-circle-fill"></i></a>
                                         </td>
                                     </tr>
                                 }
